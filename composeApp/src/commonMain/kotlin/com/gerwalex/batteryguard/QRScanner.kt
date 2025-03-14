@@ -4,7 +4,7 @@ package com.gerwalex.batteryguard
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,6 +35,7 @@ import dev.icerock.moko.permissions.camera.CAMERA
 import dev.icerock.moko.permissions.compose.BindEffect
 import dev.icerock.moko.permissions.compose.PermissionsControllerFactory
 import dev.icerock.moko.permissions.compose.rememberPermissionsControllerFactory
+import org.jetbrains.compose.ui.tooling.preview.Preview
 import qrscanner.CameraLens
 import qrscanner.QrScanner
 
@@ -62,9 +63,20 @@ fun QRScanner() {
     }
 
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text(
+            text = qrCodeURL,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 8.dp),
+            fontSize = 12.sp,
+            fontFamily = FontFamily.Serif,
+            fontWeight = FontWeight.Bold,
+            maxLines = 4,
+            overflow = TextOverflow.Ellipsis
+        )
         Box(
             Modifier
                 .size(200.dp)
@@ -91,29 +103,11 @@ fun QRScanner() {
             )
         }
 
-        if (qrCodeURL.isNotEmpty()) {
-            Row(
-                modifier = Modifier
-                    .padding(horizontal = 14.dp)
-                    .padding(bottom = 22.dp)
-                    .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = qrCodeURL,
-                    modifier = Modifier
-                        .padding(end = 8.dp)
-                        .weight(1f),
-                    fontSize = 12.sp,
-                    color = Color.White,
-                    fontFamily = FontFamily.Serif,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 4,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-            }
-        }
     }
+}
+
+@Preview
+@Composable
+fun Preview() {
+    QRScanner()
 }
